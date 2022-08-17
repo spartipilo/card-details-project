@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import bgDesktop from "./images/bg-main-desktop.png";
+import Form from "./components/Form";
+import CardFront from "./components/CardFront";
+import CardBack from "./components/CardBack";
 
-function App() {
+const App = () => {
+  const [data, setData] = useState({
+    fullName: "",
+    cardNumber: 0,
+    ExpDateMonth: 0,
+    ExpDateYers: 0,
+    cvc: 0,
+  });
+
+  const getData = (_data, _value) => {
+    setData({ ...data, [_data]: _value });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="row g-0 position-relative">
+      <div
+        className="col-4"
+        style={{
+          background: `url(${bgDesktop})`,
+          height: "100vh",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
+        <CardFront data={data} />
+        <CardBack />
+      </div>
+      <div className="col">
+        <Form getData={getData} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
